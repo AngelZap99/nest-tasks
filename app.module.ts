@@ -6,10 +6,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 
 // Modules
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from 'src/auth/auth.module';
 
 // Config
-import connectionOptions from './dbConfig';
+import connectionOptions from 'src/dbConfig';
 
 @Module({
   imports: [
@@ -26,6 +26,7 @@ import connectionOptions from './dbConfig';
   providers: [],
 })
 export class AppModule {
+  // Constructor to establish connection to the database
   constructor(private readonly dataSource: DataSource) {
     console.log('Connection to database established');
   }
