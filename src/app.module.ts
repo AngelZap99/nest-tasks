@@ -1,15 +1,22 @@
+import { join } from 'path';
 // NEST imports
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
+// import { TypeOrmModule } from '@nestjs/typeorm';
+import { GraphQLModule } from '@nestjs/graphql';
 // TypeORM imports
-import { DataSource } from 'typeorm';
+// import { DataSource } from 'typeorm';
+// Apollo imports
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 
-// Modules
+// MODULES
 import { AuthModule } from './auth/auth.module';
+import { TasksModule } from './tasks/tasks.module';
+import { UsersModule } from './users/users.module';
 
-// Config
-import connectionOptions from './dbConfig';
+// CONFIGURATIONS
+// import connectionOptions from './dbConfig';
 
 @Module({
   imports: [
@@ -17,16 +24,26 @@ import connectionOptions from './dbConfig';
     ConfigModule.forRoot({
       envFilePath: ['.env'],
     }),
+
     // third party imports
-    TypeOrmModule.forRoot(connectionOptions),
+    // TypeOrmModule.forRoot(connectionOptions), // TypeORM
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      playground: false,
+      plugins: [ApolloServerPluginLandingPageLocalDefault()],
+    }), // Apollo GraphQL
+
     // local imports
     AuthModule,
+    TasksModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],
 })
 export class AppModule {
-  constructor(private readonly dataSource: DataSource) {
-    console.log('Connection to database established');
-  }
+  // constructor(private readonly dataSource: DataSource) {
+  //   console.log('Connection to database established');
+  // }
 }

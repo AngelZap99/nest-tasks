@@ -1,0 +1,14 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Query {
+  """Get a greeting message"""
+  hello: String!
+
+  """Get the age of the user based on the year they were born"""
+  age(
+    """Year of birth"""
+    birthYear: Float = 2024
+  ): Float!
+}
