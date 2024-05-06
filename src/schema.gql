@@ -2,13 +2,90 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Query {
-  """Get a greeting message"""
-  hello: String!
+type User {
+  """Unique identifier of the user"""
+  id: ID!
 
-  """Get the age of the user based on the year they were born"""
-  age(
-    """Year of birth"""
-    birthYear: Float = 2024
-  ): Float!
+  """First name of the user"""
+  firstName: String!
+
+  """Last name of the user"""
+  lastName: String!
+
+  """Email address of the user"""
+  email: String!
+
+  """Password of the user"""
+  password: String!
+
+  """Role of the user"""
+  role: String!
+
+  """Flag to indicate if the user is active"""
+  status: Boolean!
+
+  """Date the user was created"""
+  createdAt: DateTime!
+
+  """Date the user was last updated"""
+  updatedAt: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  users(
+    """Role of the user"""
+    role: String
+
+    """Status of the user"""
+    status: Boolean
+
+    """Creation date of the user"""
+    createdAt: String
+  ): [User!]!
+  user(id: String!): User!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+}
+
+input CreateUserInput {
+  """First name of the user"""
+  firstName: String!
+
+  """Last name of the user"""
+  lastName: String!
+
+  """Email address of the user"""
+  email: String!
+
+  """Password of the user"""
+  password: String!
+
+  """Role of the user"""
+  role: String!
+}
+
+input UpdateUserInput {
+  """First name of the user"""
+  firstName: String
+
+  """Last name of the user"""
+  lastName: String
+
+  """Email address of the user"""
+  email: String
+
+  """Password of the user"""
+  password: String
+
+  """Role of the user"""
+  role: String
+  id: String!
 }

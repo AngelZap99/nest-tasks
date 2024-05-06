@@ -12,8 +12,8 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 
 // MODULES
 import { AuthModule } from './auth/auth.module';
-import { TasksModule } from './tasks/tasks.module';
 import { UsersModule } from './users/users.module';
+import { TasksModule } from './tasks/tasks.module';
 
 // CONFIGURATIONS
 // import connectionOptions from './dbConfig';
@@ -36,8 +36,8 @@ import { UsersModule } from './users/users.module';
 
     // local imports
     AuthModule,
-    TasksModule,
     UsersModule,
+    TasksModule,
   ],
   controllers: [],
   providers: [],
